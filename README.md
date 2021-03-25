@@ -1,16 +1,27 @@
 # modulo-4
 
-## Project setup
+## Configuración
+
+Puedes descargar el código como un archivo .rar y descomprimirlo en una ruta determinada, o puedes usar git para clonar el repositorio con el siguiente comando
+
+```
+git clone https://github.com/danteabrahamdan/modulo-4.git
+```
+
+Una vez que tengas el código puedes proceder a instalar las dependecias, y dependecias de desarrollo, con el comando
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+Esto revisara el `package.json` y hara las instalaciones necesarias descritas en etse archivo y ya tendras el proyecto recosntruido y listo para poder usarlo
+
+### Compilar el código para ejecutaro de manera local
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compilar el código para ya generar el build de producción
 ```
 npm run build
 ```
