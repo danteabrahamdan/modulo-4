@@ -3,7 +3,7 @@
     <div
       class="container-login100 bg-auth"
     >
-      <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+      <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54 animate__animated animate__fadeIn">
         <form class="login100-form" autocomplete="off" @submit.prevent="login">
           <span class="login100-form-title p-b-49">
             Inicia sesión

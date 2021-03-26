@@ -3,7 +3,7 @@
     <div
       class="container-login100 bg-auth"
     >
-      <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+      <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54 animate__animated animate__fadeIn">
         <form class="login100-form" autocomplete="off" @submit.prevent="register">
           <span class="login100-form-title p-b-49">
             Registrate
@@ -99,6 +99,8 @@ export default {
       await this.axios.post('/api/usuarios', this.usuario)
         .then(res => {
           const token = res.data.token;
+          const dataU = JSON.stringify(res.data.usuario);
+          localStorage.setItem('usuario', dataU);
           this.guardarToken(token);
           this.loading = false;
         })
@@ -120,5 +122,9 @@ export default {
 
 .bg-auth {
   background-image: url('../assets/images/bg-01.jpg');
+}
+
+.animate__animated {
+  animation-duration: 1s;
 }
 </style>
