@@ -35,7 +35,7 @@
 
           <div class="text-right p-t-8 p-b-31"></div>
 
-          <div class="container-login100-form-btn">
+          <div class="container-login100-form-btn" v-if="loading === false">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
               <button class="login100-form-btn" type="submit">
@@ -44,7 +44,9 @@
             </div>
           </div>
 
-          <div class="flex-col-c p-t-60">
+          <LoadingComponent v-else/>
+
+          <div class="flex-col-c p-t-20">
             <span class="txt1 p-b-17">
               ¿No tienes cuenta?
             </span>
@@ -62,27 +64,36 @@
 <script>
 
 import { mapActions } from "vuex";
+import LoadingComponent from '@/components/LoadingComponent.vue'
 
 export default {
+  name: 'Login',
+  components: {
+    LoadingComponent
+  },
   data() {
     return {
-      usuario: { email: '', password: '' }
+      usuario: { email: '', password: '' },
+      loading: false
     }
   },
   methods: {
     ...mapActions(['guardarToken']),
     async login() {
+      this.loading = true;
       if(this.usuario.email === '' || this.usuario.password === '') {
+        this.loading = false;
         return
       }
       await this.axios.post('/api/login', this.usuario)
         .then(res => {
           //localStorage.setItem('token', res.data.token);
-          console.log(res.data);
           const token = res.data.token;
           this.guardarToken(token);
+          this.loading = false;
         })
         .catch(err => {
+          this.loading = false;
           this.$swal({
             icon: 'error',
             title: 'Error',
