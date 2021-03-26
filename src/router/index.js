@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import store from "../store/index";
+import NotFound from "../views/NotFound.vue"
+import Dashboard from "../views/Dashboard.vue"
+import store from "../store/index"
 
 
 const routes = [
@@ -8,7 +10,10 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta: { requireAuth: true }
+    meta: { requireAuth: true },
+    children: [
+      { path: '/', name: 'Dashboard', component: Dashboard }
+    ]
   },
   {
     path: '/login',
@@ -19,6 +24,21 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
+  },
+  // Redirecciones
+  {
+    path: '/home',
+    redirect: '/'
+  },
+  {
+    path: '/dashboard',
+    redirect: '/'
+  },
+  // 404
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 
