@@ -10,7 +10,7 @@ export default createStore({
     }
   },
   mutations: {
-    verificarToken(state, token) {
+    async verificarToken(state, token) {
       state.token = token;
 
       if(token === '') {
@@ -18,14 +18,14 @@ export default createStore({
       }
       else {
         // TODO: Decode id de token
-        axios.get('api/login/renew', { headers: { "x-token": state.token } })
+        await axios.get('api/login/renew', { headers: { "x-token": state.token } })
           .then(res => {
             state.usuarioActual = res.data.usuario;
             state.token = res.data.token;
             localStorage.setItem('token', state.token);
           })
           .catch(e => console.log(e.response.data.msg));
-        router.push({ name: 'Dashboard' });
+        //router.push({ name: 'Dashboard' });
       }
     }
   },

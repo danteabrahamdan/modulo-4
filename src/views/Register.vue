@@ -5,14 +5,14 @@
     >
       <div class="wrap-login100 p-l-55 p-r-55 p-t-40 p-b-40 animate__animated animate__fadeIn">
         <form class="login100-form" autocomplete="off" @submit.prevent="register">
-          <span class="login100-form-title p-b-49">
+          <span class="login100-form-title p-b-49 size12">
             Registrate
           </span>
 
           <div class="wrap-input100 m-b-23">
-            <span class="label-input100">Nombre</span>
+            <span class="label-input100 size8">Nombre</span>
             <input
-              class="input100"
+              class="input100 size8"
               type="text"
               name="nombre"
               placeholder="Ingrese su nombre"
@@ -22,9 +22,9 @@
           </div>
 
           <div class="wrap-input100 m-b-23">
-            <span class="label-input100">Email</span>
+            <span class="label-input100 size8">Email</span>
             <input
-              class="input100"
+              class="input100 size8"
               type="email"
               name="email"
               placeholder="Ingrese su email"
@@ -34,9 +34,9 @@
           </div>
 
           <div class="wrap-input100">
-            <span class="label-input100">Contraseña</span>
+            <span class="label-input100 size8">Contraseña</span>
             <input
-              class="input100"
+              class="input100 size8"
               type="password"
               name="password"
               placeholder="Ingrese su contraseña"
@@ -50,7 +50,7 @@
           <div class="container-login100-form-btn" v-if="loading === false">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
-              <button class="login100-form-btn" type="submit">
+              <button class="login100-form-btn size8" type="submit">
                 Registrar
               </button>
             </div>
@@ -59,11 +59,11 @@
           <LoadingComponent v-else/>
 
           <div class="flex-col-c p-t-20">
-            <span class="txt1 p-b-17">
+            <span class="txt1 p-b-17 size8">
               ¿Ya tienes una cuenta?
             </span>
 
-            <router-link to="/login" class="txt2">
+            <router-link :to="{ name: 'Login' }" class="txt2 size8">
               Inicia sesión
             </router-link>
           </div>
@@ -103,6 +103,7 @@ export default {
           localStorage.setItem('usuario', dataU);
           this.guardarToken(token);
           this.loading = false;
+          this.$router.push({ name: 'Dashboard' });
         })
         .catch(err => {
           this.loading = false;
@@ -117,7 +118,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "../styles/auth.scss";
 
 .bg-auth {
@@ -126,5 +127,13 @@ export default {
 
 .animate__animated {
   animation-duration: 1s;
+}
+
+.size8 {
+  font-size: 0.8em;
+}
+
+.size12 {
+  font-size: 1.2em;
 }
 </style>

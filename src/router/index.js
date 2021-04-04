@@ -1,7 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import NotFound from "../views/NotFound.vue"
-import Dashboard from "../views/Dashboard.vue"
+import Dashboard from "../views/usuario/Dashboard.vue"
+import Profile from "../views/usuario/Profile.vue"
+import EditProfile from "../views/usuario/EditProfile.vue"
+import Hospitales from "../views/categorias/Hospitales.vue"
+import Medicos from "../views/categorias/Medicos.vue"
+import Usuarios from "../views/categorias/Usuarios.vue"
 import store from "../store/index"
 
 
@@ -12,7 +17,12 @@ const routes = [
     component: Home,
     meta: { requireAuth: true },
     children: [
-      { path: '/', name: 'Dashboard', component: Dashboard }
+      { path: '/', name: 'Dashboard', component: Dashboard },
+      { path: '/profile', name: 'Profile', component: Profile },
+      { path: '/editprofile', name: 'EditProfile', component: EditProfile },
+      { path: '/hospitales', name: 'Hospitales', component: Hospitales },
+      { path: '/medicos', name: 'Medicos', component: Medicos },
+      { path: '/usuarios', name: 'Usuarios', component: Usuarios },
     ]
   },
   {
