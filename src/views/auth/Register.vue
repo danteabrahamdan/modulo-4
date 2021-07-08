@@ -1,8 +1,6 @@
 <template>
   <div class="limiter">
-    <div
-      class="container-login100 bg-auth"
-    >
+    <div class="container-login100 bg-auth">
       <div class="wrap-login100 p-l-55 p-r-55 p-t-40 p-b-40 animate__animated animate__fadeIn">
         <form class="login100-form" autocomplete="off" @submit.prevent="register">
           <span class="login100-form-title p-b-49 size12">
@@ -16,8 +14,7 @@
               type="text"
               name="nombre"
               placeholder="Ingrese su nombre"
-              v-model.trim="usuario.nombre"
-            />
+              v-model="usuario.nombre"/>
             <span class="focus-input100"></span>
           </div>
 
@@ -28,8 +25,7 @@
               type="email"
               name="email"
               placeholder="Ingrese su email"
-              v-model.trim="usuario.email"
-            />
+              v-model="usuario.email"/>
             <span class="focus-input100"></span>
           </div>
 
@@ -40,8 +36,7 @@
               type="password"
               name="password"
               placeholder="Ingrese su contraseña"
-              v-model.trim="usuario.password"
-            />
+              v-model="usuario.password"/>
             <span class="focus-input100"></span>
           </div>
 
@@ -63,7 +58,7 @@
               ¿Ya tienes una cuenta?
             </span>
 
-            <router-link :to="{ name: 'Login' }" class="txt2 size8">
+            <router-link :to="{name: 'Login'}" class="txt2 size8">
               Inicia sesión
             </router-link>
           </div>
@@ -74,8 +69,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import LoadingComponent from '@/components/LoadingComponent.vue'
+
 
 export default {
   name: 'Register',
@@ -84,26 +79,21 @@ export default {
   },
   data() {
     return {
-      usuario: { password: '', email: '', nombre: '' },
+      usuario: { nombre: '', password: '', email: '' },
       loading: false
     }
   },
   methods: {
-    ...mapActions(['guardarToken']),
     async register() {
       this.loading = true;
-      if(this.usuario.email === '' || this.usuario.password === '' || this.usuario.nombre === '') {
+      if(this.usuario.nombre === '' || this.usuario.email === '' || this.usuario.password === '') {
         this.loading = false;
         return
       }
       await this.axios.post('/api/usuarios', this.usuario)
         .then(res => {
-          const token = res.data.token;
-          const dataU = JSON.stringify(res.data.usuario);
-          localStorage.setItem('usuario', dataU);
-          this.guardarToken(token);
+          this.$router.push({ name: 'Home' });
           this.loading = false;
-          this.$router.push({ name: 'Dashboard' });
         })
         .catch(err => {
           this.loading = false;
@@ -112,28 +102,24 @@ export default {
             title: 'Error',
             text: err.response.data.msg
           });
-        })
+        });
     }
   }
 }
 </script>
 
-<style scoped lang="scss">
-@import "../styles/auth.scss";
+<style lang="scss">
+@import "../../styles/auth.scss";
 
 .bg-auth {
-  background-image: url('../assets/images/bg-01.jpg');
-}
-
-.animate__animated {
-  animation-duration: 1s;
+    background-image: url('../../assets/images/bg-01.jpg');
 }
 
 .size8 {
-  font-size: 0.8em;
+    font-size: 0.8em;
 }
 
 .size12 {
-  font-size: 1.2em;
+    font-size: 1.2em;
 }
 </style>
